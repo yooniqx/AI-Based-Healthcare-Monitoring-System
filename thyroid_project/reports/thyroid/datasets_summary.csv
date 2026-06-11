@@ -1,0 +1,4 @@
+Dataset,Status,File
+hypothyroid,Available,hypothyroid.data
+ann-thyroid,Available,ann-train.data
+new-thyroid,Available,new-thyroid.data

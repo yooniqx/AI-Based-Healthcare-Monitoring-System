@@ -1,0 +1,9 @@
+Metric,Value
+Total Records,341
+Total Features,10
+Selector 1 Count,142
+Selector 2 Count,199
+Mean Drinks/Day,3.43
+High AST/ALT Ratio (>2),10 (2.9%)
+Significant Features (p<0.05),3
+Strongest Correlation with Selector,ast_alt_ratio

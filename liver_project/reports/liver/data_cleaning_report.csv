@@ -1,0 +1,12 @@
+Metric,Value
+Original Records,345
+Duplicates Removed,4
+Final Records,341
+Original Features,7
+Engineered Features,3
+Final Features,10
+Missing Values (Original),0
+Missing Values (Final),0
+Outliers Detected,106
+Outliers Removed,0
+Data Quality Score,98.84%

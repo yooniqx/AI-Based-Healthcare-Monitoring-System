@@ -1,0 +1,56 @@
+Dataset,Action,Details
+hypothyroid,Loaded,"3163 rows, 26 columns"
+hypothyroid,Dropped column,TBG (91.8% missing)
+hypothyroid,Dropped column,TBG_measured (related to dropped TBG)
+hypothyroid,Imputed missing,age: 446 values with median (54.00)
+hypothyroid,Imputed missing,TSH: 468 values with median (0.70)
+hypothyroid,Imputed missing,T3: 695 values with median (1.80)
+hypothyroid,Imputed missing,TT4: 249 values with median (104.00)
+hypothyroid,Imputed missing,T4U: 248 values with median (0.96)
+hypothyroid,Imputed missing,FTI: 247 values with median (107.00)
+hypothyroid,Imputed missing,sex: 73 values with mode (F)
+hypothyroid,Removed duplicates,160 rows (5.06%)
+hypothyroid,Converted to binary,on_thyroxine: f/t -> 0/1
+hypothyroid,Converted to binary,query_on_thyroxine: f/t -> 0/1
+hypothyroid,Converted to binary,on_antithyroid_medication: f/t -> 0/1
+hypothyroid,Converted to binary,thyroid_surgery: f/t -> 0/1
+hypothyroid,Converted to binary,query_hypothyroid: f/t -> 0/1
+hypothyroid,Converted to binary,query_hyperthyroid: f/t -> 0/1
+hypothyroid,Converted to binary,pregnant: f/t -> 0/1
+hypothyroid,Converted to binary,sick: f/t -> 0/1
+hypothyroid,Converted to binary,tumor: f/t -> 0/1
+hypothyroid,Converted to binary,lithium: f/t -> 0/1
+hypothyroid,Converted to binary,goitre: f/t -> 0/1
+hypothyroid,Converted to binary,TSH_measured: f/t -> 0/1
+hypothyroid,Converted to binary,T3_measured: f/t -> 0/1
+hypothyroid,Converted to binary,TT4_measured: f/t -> 0/1
+hypothyroid,Converted to binary,T4U_measured: f/t -> 0/1
+hypothyroid,Converted to binary,FTI_measured: f/t -> 0/1
+hypothyroid,Converted to binary,sex: M/F -> 1/0
+hypothyroid,Converted to binary,class: negative/hypothyroid -> 0/1
+hypothyroid,Capped outliers,TSH: 412 values (13.72%)
+hypothyroid,Capped outliers,T3: 240 values (7.99%)
+hypothyroid,Capped outliers,TT4: 221 values (7.36%)
+hypothyroid,Capped outliers,T4U: 217 values (7.23%)
+hypothyroid,Capped outliers,FTI: 285 values (9.49%)
+hypothyroid,Removed final duplicates,1 rows created by transformations
+hypothyroid,Saved,"3002 rows, 24 columns to hypothyroid_cleaned.csv"
+ann-thyroid,Loaded,"3772 train + 3428 test = 7200 rows, 23 columns"
+ann-thyroid,Mapped class,1/2/3 -> normal/hyperfunction/subnormal
+ann-thyroid,Removed duplicates,71 rows (0.99%)
+ann-thyroid,Capped outliers,TSH: 751 values (10.53%)
+ann-thyroid,Capped outliers,T3: 822 values (11.53%)
+ann-thyroid,Capped outliers,TT4: 389 values (5.46%)
+ann-thyroid,Capped outliers,T4U: 495 values (6.94%)
+ann-thyroid,Capped outliers,FTI: 428 values (6.00%)
+ann-thyroid,Saved,"7129 rows, 23 columns to ann_thyroid_cleaned.csv"
+new-thyroid,Loaded,"215 rows, 6 columns"
+new-thyroid,Mapped class,1/2/3 -> normal/hyperthyroid/hypothyroid
+new-thyroid,No duplicates,Dataset is clean
+new-thyroid,Negative values found,max_TSH_difference: 28 negative values (kept as valid)
+new-thyroid,Capped outliers,T3_resin_uptake: 10 values (4.65%)
+new-thyroid,Capped outliers,total_serum_thyroxin: 16 values (7.44%)
+new-thyroid,Capped outliers,total_serum_triiodothyronine: 20 values (9.30%)
+new-thyroid,Capped outliers,basal_TSH: 26 values (12.09%)
+new-thyroid,Capped outliers,max_TSH_difference: 18 values (8.37%)
+new-thyroid,Saved,"215 rows, 6 columns to new_thyroid_cleaned.csv"

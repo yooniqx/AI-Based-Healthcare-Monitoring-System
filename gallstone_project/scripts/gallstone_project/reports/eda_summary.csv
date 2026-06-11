@@ -1,0 +1,13 @@
+Category,Metric,Value
+Dataset Overview,Total Records,5
+Dataset Overview,Total Features,39
+Dataset Overview,Numerical Features,38
+Dataset Overview,Categorical Features,0
+Dataset Overview,Missing Values,0
+Dataset Overview,Duplicate Rows,0
+Dataset Overview,Memory Usage (KB),1.65
+Target Distribution,No Gallstones (0),5
+Target Distribution,Gallstones (1),0
+Target Distribution,Class Balance,100.0% / 0.0%
+Data Quality,Completeness,100%
+Data Quality,Uniqueness,100%

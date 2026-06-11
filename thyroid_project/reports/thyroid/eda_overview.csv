@@ -1,0 +1,4 @@
+Dataset,Rows,Columns,Memory_Usage_MB,Numerical_Features,Categorical_Features,Missing_Values,Duplicate_Rows
+hypothyroid,3002,24,0.5498085021972656,24,0,0,0
+ann_thyroid,7129,23,1.9014415740966797,21,2,0,0
+new_thyroid,215,6,0.01994800567626953,5,1,0,0
