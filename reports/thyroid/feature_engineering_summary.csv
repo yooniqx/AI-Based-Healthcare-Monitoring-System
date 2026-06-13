@@ -1,4 +1,0 @@
-Dataset,Original_Features,Engineered_Features,New_Features,Records
-ann_thyroid,23,82,59,7129
-hypothyroid,24,83,59,3002
-new_thyroid,6,34,28,215

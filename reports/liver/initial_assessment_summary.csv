@@ -1,2 +1,0 @@
-Dataset,Total_Records,Total_Features,Numeric_Features,Categorical_Features,Missing_Values,Duplicate_Rows,Memory_Usage_KB,Selector_1_Count,Selector_2_Count
-BUPA Liver Disorders,345,7,7,0,0,4,19.0,145,200

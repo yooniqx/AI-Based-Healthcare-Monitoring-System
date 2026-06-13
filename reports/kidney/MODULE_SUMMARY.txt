@@ -1,0 +1,88 @@
+# CHRONIC KIDNEY DISEASE MODULE SUMMARY
+
+## Dataset Overview
+- **Total Samples**: 397
+- **Total Features**: 24
+- **Target Variable**: ckd_status (0=No CKD, 1=CKD)
+
+## Data Split
+- **Training Set**: 317 samples (79.8%)
+- **Test Set**: 80 samples (20.2%)
+
+## Target Distribution
+- **No CKD (0)**: 149 samples (37.5%)
+- **CKD (1)**: 248 samples (62.5%)
+
+## Features (24)
+- age
+- blood_pressure
+- specific_gravity
+- albumin
+- sugar
+- red_blood_cells
+- pus_cells
+- pus_cell_clumps
+- bacteria
+- blood_glucose_random
+- blood_urea
+- serum_creatinine
+- sodium
+- potassium
+- hemoglobin
+- packed_cell_volume
+- white_blood_cell_count
+- red_blood_cell_count
+- hypertension
+- diabetes_mellitus
+- coronary_artery_disease
+- appetite
+- pedal_edema
+- anemia
+
+## Directory Structure
+```
+datasets/kidney/
+├── kidney_master_dataset.csv
+└── ml_ready/
+    ├── X_train.csv
+    ├── X_test.csv
+    ├── y_train.csv
+    └── y_test.csv
+
+reports/kidney/
+├── kidney_DATASET_SUMMARY.txt
+└── eda/
+    ├── correlation_heatmap.png
+    ├── feature_correlation_with_target.png
+    ├── feature_distributions.png
+    ├── outlier_analysis.png
+    └── target_distribution.png
+
+scripts/
+├── feature_engineering.py
+└── perform_eda.py
+```
+
+## Data Quality
+- **Missing Values**: 0 total
+- **Duplicate Rows**: 0
+
+## Top Correlated Features with Target
+1. albumin: 0.610
+2. hypertension: 0.591
+3. diabetes_mellitus: 0.547
+4. blood_glucose_random: 0.412
+5. appetite: 0.395
+6. blood_urea: 0.380
+7. pus_cells: 0.377
+8. pedal_edema: 0.374
+9. sugar: 0.332
+10. anemia: 0.327
+
+## Generated Files
+- Train/Test splits saved in: datasets/kidney/ml_ready/
+- EDA visualizations saved in: reports/kidney/eda/
+- Summary document: reports/kidney/KIDNEY_MODULE_SUMMARY.txt
+
+---
+Generated on: 2026-06-11 21:31:36
