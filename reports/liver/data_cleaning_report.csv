@@ -1,12 +1,16 @@
-Metric,Value
-Original Records,345
-Duplicates Removed,4
-Final Records,341
-Original Features,7
-Engineered Features,3
-Final Features,10
-Missing Values (Original),0
-Missing Values (Final),0
-Outliers Detected,106
-Outliers Removed,0
-Data Quality Score,98.84%
+Action,Details
+Loaded,"345 rows, 7 columns"
+No missing values,Dataset is complete
+Removed duplicates,4 rows (1.16%)
+Outliers detected,mcv: 9 values (2.64%) - kept as valid
+Outliers detected,alkphos: 9 values (2.64%) - kept as valid
+Outliers detected,sgpt: 28 values (8.21%) - kept as valid
+Outliers detected,sgot: 24 values (7.04%) - kept as valid
+Outliers detected,gammagt: 27 values (7.92%) - kept as valid
+Outliers detected,drinks: 9 values (2.64%) - kept as valid
+Saved outlier analysis,6 features with outliers
+Created feature,ast_alt_ratio (AST/ALT ratio)
+Created feature,alcohol_category (5 levels)
+Created feature,total_enzyme_score (normalized enzyme sum)
+Negative values found,total_enzyme_score: 215 values
+Saved,"341 rows, 10 columns to liver_cleaned.csv"

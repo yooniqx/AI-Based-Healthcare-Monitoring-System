@@ -1,9 +1,2 @@
-Metric,Value
-Total Records,345
-Total Features,7
-Missing Values,0
-Duplicate Rows,4
-Selector 1 Count,145
-Selector 2 Count,200
-Mean Drinks/Day,3.46
-Median Drinks/Day,3.00
+Dataset,Total_Records,Total_Features,Numeric_Features,Categorical_Features,Missing_Values,Duplicate_Rows,Memory_Usage_KB,Selector_1_Count,Selector_2_Count
+BUPA Liver Disorders,345,7,7,0,0,4,19.0,145,200

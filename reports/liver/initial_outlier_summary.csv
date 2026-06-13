@@ -1,0 +1,7 @@
+Feature,Outlier_Count,Outlier_Percentage,Q1,Q3,IQR
+mcv,2,0.58,87.0,93.0,6.0
+alkphos,9,2.61,57.0,80.0,23.0
+sgpt,28,8.12,19.0,34.0,15.0
+sgot,24,6.96,19.0,27.0,8.0
+gammagt,27,7.83,15.0,46.0,31.0
+drinks,5,1.45,0.5,6.0,5.5
