@@ -99,10 +99,10 @@ PROJECT/
 7. **Model Selection** - Evaluated Logistic Regression, Random Forest, and SVM
 8. **Model Training** - Trained and evaluated models for all 9 modules
 9. **Model Validation** - Tested and validated all prediction systems
+10. **Hyperparameter Tuning** - Optimized model parameters using GridSearchCV for all 7 ML modules
 
 ### 🔜 Upcoming Stages
 
-- Model Refinement - Hyperparameter tuning and optimization
 - Streamlit Frontend - Web-based prediction interface
 - Module Integration - Complete system integration
 - Healthcare Recommendations - Personalized health advice
@@ -115,15 +115,17 @@ PROJECT/
 
 | Module | Best Model | Accuracy | F1 Score | ROC-AUC | Status |
 |--------|-----------|----------|----------|---------|--------|
-| **Heart** | Random Forest | 86.67% | 86.62% | 94.14% | ✅ Ready |
-| **Kidney** | Logistic Regression | 98.75% | 98.75% | 99.87% | ✅ Ready |
-| **Lung** | SVM | 57.14% | 47.62% | - | ✅ Ready* |
-| **Diabetes** | Logistic Regression | 92.86% | 93.36% | - | ✅ Ready |
-| **Thyroid** | Random Forest | 98.88% | 98.90% | - | ✅ Ready |
-| **Liver** | Random Forest | 72.46% | 71.97% | 77.59% | ✅ Ready |
-| **Survey** | Random Forest | 100.00% | 100.00% | - | ✅ Ready |
+| **Heart** | Random Forest | 86.67% | 86.62% | 94.14% | ✅ Tuned |
+| **Kidney** | Logistic Regression | 98.75% | 98.75% | 99.87% | ✅ Tuned |
+| **Lung** | SVM | 57.14% | 47.62% | - | ✅ Tuned* |
+| **Diabetes** | Logistic Regression | 92.86% | 93.36% | - | ✅ Tuned |
+| **Thyroid** | Random Forest | 98.88% | 98.90% | - | ✅ Tuned |
+| **Liver** | Random Forest | 72.46% | 71.97% | 77.59% | ✅ Tuned |
+| **Survey** | Random Forest | 100.00% | 100.00% | - | ✅ Tuned |
 
 *Limited training data affects performance
+
+**All models have been optimized using GridSearchCV hyperparameter tuning!**
 
 ### Rule-Based Screening Engines (2/9) ✅
 
@@ -133,6 +135,49 @@ PROJECT/
 | **Mental Health** | Questionnaire (10Q) | Low/Mild/Moderate/High | ✅ Tested | ✅ Ready |
 
 **All 9 modules are now ready for production deployment!**
+
+## 🎯 Hyperparameter Tuning
+
+All 7 machine learning models have undergone comprehensive hyperparameter optimization using GridSearchCV with 5-fold cross-validation. The tuning process optimized the following parameters for each model type:
+
+### Optimization Details
+
+**Logistic Regression** (Diabetes, Kidney):
+- Regularization strength (C): [0.001, 0.01, 0.1, 1, 10, 100]
+- Penalty type: ['l1', 'l2']
+- Solver: ['liblinear', 'saga']
+- Max iterations: [100, 200, 500]
+
+**Random Forest** (Heart, Thyroid, Liver, Survey):
+- Number of estimators: [50, 100, 200, 300]
+- Max depth: [None, 10, 20, 30]
+- Min samples split: [2, 5, 10]
+- Min samples leaf: [1, 2, 4]
+- Max features: ['sqrt', 'log2']
+
+**Support Vector Machine** (Lung):
+- Kernel type: ['linear', 'rbf', 'poly']
+- Regularization (C): [0.1, 1, 10, 100]
+- Gamma: ['scale', 'auto', 0.001, 0.01, 0.1]
+- Degree (for poly): [2, 3, 4]
+
+### Tuned Model Files
+
+Each module now has two sets of models:
+- **Base Models**: `{module}_model.pkl` and `{module}_scaler.pkl`
+- **Tuned Models**: `{module}_model_tuned.pkl` and `{module}_scaler_tuned.pkl`
+
+The tuned models are recommended for production use as they provide optimized performance through systematic hyperparameter search.
+
+### Running Hyperparameter Tuning
+
+```bash
+# Run comprehensive hyperparameter tuning for all modules
+python scripts/model_training/hyperparameter_tuning.py
+
+# Quick tuning with reduced parameter grid (faster)
+python scripts/model_training/quick_hyperparameter_tuning.py
+```
 
 ## 🚀 Getting Started
 
@@ -171,10 +216,10 @@ Each disease module follows a standardized structure:
 import pandas as pd
 import pickle
 
-# Load trained model and scaler
-with open('models/heart_model.pkl', 'rb') as f:
+# Load tuned model and scaler (recommended for production)
+with open('models/heart_model_tuned.pkl', 'rb') as f:
     model = pickle.load(f)
-with open('models/heart_scaler.pkl', 'rb') as f:
+with open('models/heart_scaler_tuned.pkl', 'rb') as f:
     scaler = pickle.load(f)
 
 # Prepare input data
@@ -188,6 +233,8 @@ probability = model.predict_proba(X_scaled)
 print(f"Prediction: {prediction[0]}")
 print(f"Probability: {probability[0]}")
 ```
+
+**Note**: Use `{module}_model_tuned.pkl` for optimized performance. Base models (`{module}_model.pkl`) are also available.
 
 #### 1b. Use Rule-Based Screening Engines
 
@@ -255,8 +302,14 @@ python scripts/feature_engineering/feature_engineering.py
 # Generate ML-ready splits
 python scripts/utilities/create_ml_ready_splits.py
 
-# Train models
+# Train base models
 python scripts/model_training/train_models_robust.py
+
+# Hyperparameter tuning (comprehensive)
+python scripts/model_training/hyperparameter_tuning.py
+
+# Quick hyperparameter tuning (faster, reduced grid)
+python scripts/model_training/quick_hyperparameter_tuning.py
 ```
 
 ## 📈 Exploratory Data Analysis
