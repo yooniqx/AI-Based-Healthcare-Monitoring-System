@@ -422,7 +422,21 @@ For questions or collaboration opportunities, please reach out through the proje
 
 ## 📄 License
 
-This project is developed for educational purposes.
+**Copyright © 2026 AI-Based-Healthcare-Project-Team. All Rights Reserved.**
+
+This repository and all its contents are proprietary and confidential. No permission is granted to copy, reproduce, distribute, modify, publish, sublicense, sell, or commercially use any part of this repository without prior written permission from the AI-Based-Healthcare-Project-Team organization.
+
+**Prohibited Actions:**
+- Unauthorized copying, reproduction, or distribution of code, datasets, documentation, trained models, reports, or any project assets
+- Modification or creation of derivative works
+- Commercial use or exploitation
+- Public sharing or publishing of repository contents
+
+**Intended Use:** This repository is for academic and project-development purposes by authorized organization members only.
+
+For permissions or inquiries, contact the AI-Based-Healthcare-Project-Team organization administrators.
+
+See the [LICENSE](LICENSE) file for complete terms and conditions.
 
 ---
 
