@@ -1,25 +1,10 @@
 """
 AI Based Healthcare System — Backend
 ======================================
-College mini project.
+College mini project - INTEGRATED WITH TRAINED MODELS
 
-This module contains all the "backend" logic: a tiny rule-based NLP
-intent detector, a symptom triage scorer, a mental-health mood
-evaluator, SQLite persistence, and a simulated ambulance dispatch
-function.
-
-It has ZERO Streamlit imports — it is pure Python so it can be reused,
-unit-tested, or swapped for real ML models later without touching the
-frontend.
-
-Folder structure expected:
-
-    project/
-      backend/
-        backend.py    <-- this file
-        healthcare.db  (auto-created on first run)
-      frontend/
-        app.py
+This module contains all the "backend" logic integrated with trained ML models.
+It connects to the model_integration module for real disease predictions.
 
 Run a quick self-test with:
     python backend.py
@@ -28,6 +13,17 @@ Run a quick self-test with:
 import sqlite3
 import os
 from datetime import datetime, date
+
+# Import model integration
+try:
+    from model_integration import predict_disease, get_available_modules, get_module_features
+    MODEL_INTEGRATION_AVAILABLE = True
+except ImportError as e:
+    print(f"Warning: Model integration not available: {e}")
+    MODEL_INTEGRATION_AVAILABLE = False
+    predict_disease = None
+    get_available_modules = None
+    get_module_features = None
 
 
 # -------------------------------------------------------------------
@@ -120,51 +116,144 @@ def get_chat_history(limit: int = 50):
 EMERGENCY_KEYWORDS = [
     "chest pain", "can't breathe", "cannot breathe", "suicidal",
     "unconscious", "heavy bleeding", "severe bleeding", "not breathing",
+    "heart attack", "stroke", "overdose", "poisoning",
 ]
 
-MENTAL_HEALTH_KEYWORDS = ["sad", "depressed", "anxious", "hopeless", "stressed", "panic"]
+MENTAL_HEALTH_KEYWORDS = [
+    "sad", "depressed", "anxious", "hopeless", "stressed", "panic",
+    "lonely", "worthless", "overwhelmed", "can't sleep", "cannot sleep",
+]
 
-SYMPTOM_KEYWORDS = ["headache", "fever", "cough", "nausea", "fatigue", "dizziness", "sore throat"]
+SYMPTOM_KEYWORDS = [
+    "headache", "fever", "cough", "nausea", "fatigue", "dizziness",
+    "sore throat", "vomiting", "pain", "ache", "breathless", "swelling",
+    "itching", "rash", "bleeding", "weakness", "cold", "flu",
+]
+
+HEART_KEYWORDS     = ["heart", "cardiac", "cholesterol", "blood pressure", "hypertension", "angina"]
+DIABETES_KEYWORDS  = ["diabetes", "blood sugar", "glucose", "insulin"]
+KIDNEY_KEYWORDS    = ["kidney", "renal", "urine", "creatinine"]
+LIVER_KEYWORDS     = ["liver", "jaundice", "hepatitis", "bilirubin"]
+THYROID_KEYWORDS   = ["thyroid", "tsh", "hypothyroid", "hyperthyroid", "goitre", "goiter"]
+LUNG_KEYWORDS      = ["lung", "breathing", "respiratory", "asthma", "copd", "smoking"]
+
+CAPABILITY_KEYWORDS = [
+    "what can you do", "help", "how do you work", "what are your features",
+    "what do you offer", "capabilities", "what can i ask", "how to use",
+    "features", "functions", "tools",
+]
+
+CAPABILITIES_REPLY = (
+    "Here's what I can help you with:\n\n"
+    "🔍 **Disease Prediction** — Use the sidebar to run ML-powered risk assessments for:\n"
+    "  ❤️ Heart Disease  |  🫘 Kidney Disease  |  🩸 Diabetes  |  🫁 Lung Cancer\n"
+    "  🦋 Thyroid  |  🫀 Liver Disease  |  📊 Glucose Survey Risk\n\n"
+    "🟢 **Rule-Based Assessments** — Gallbladder risk & Mental Health screening\n\n"
+    "📟 **Vitals Monitor** — Check heart rate, SpO2, and temperature for alerts\n\n"
+    "💊 **Medication Reminders** — Log and track your daily medications\n\n"
+    "🚑 **Emergency SOS** — Trigger an ambulance alert with your location\n\n"
+    "💬 **Symptom Chat** — Describe your symptoms here and I'll guide you to the right tool.\n\n"
+    "Just tell me what's bothering you, or pick a module from the sidebar!"
+)
 
 
 def get_bot_response(user_message: str) -> dict:
     """
-    TODO(model): Replace this rule-based logic with a real trained
-    intent-classification model, e.g.:
+    Rule-based intent router.
 
+    TODO(model): Replace with a trained intent-classification model:
         import joblib
         clf = joblib.load("models/intent_classifier.pkl")
         intent = clf.predict([user_message])[0]
 
-    Returns a dict: {"reply": str, "sos_triggered": bool}
+    Returns {"reply": str, "sos_triggered": bool}
     """
     text = user_message.lower()
 
+    # --- Emergency ---
     if any(k in text for k in EMERGENCY_KEYWORDS):
         return {
-            "reply": ("⚠️ This sounds like it could be a medical emergency. "
-                      "I've flagged this for an SOS alert — please check the Emergency tab, "
-                      "or call your local emergency number immediately."),
+            "reply": (
+                "⚠️ This sounds like a medical emergency. "
+                "I've flagged an SOS alert — please check the 🚑 SOS tab immediately, "
+                "or call your local emergency number (112 / 911 / 999)."
+            ),
             "sos_triggered": True,
         }
 
+    # --- Capabilities / help ---
+    if any(k in text for k in CAPABILITY_KEYWORDS):
+        return {"reply": CAPABILITIES_REPLY, "sos_triggered": False}
+
+    # --- Organ-specific routing ---
+    if any(k in text for k in HEART_KEYWORDS):
+        return {
+            "reply": ("That sounds heart-related. Please use the ❤️ Heart Disease module in the sidebar "
+                      "for a detailed ML-based risk assessment. It evaluates cholesterol, ECG, blood pressure, and more."),
+            "sos_triggered": False,
+        }
+    if any(k in text for k in DIABETES_KEYWORDS):
+        return {
+            "reply": ("For diabetes or blood sugar concerns, head to the 🩸 Diabetes module. "
+                      "You can also try the 📊 Survey module for a lifestyle-based glucose risk check."),
+            "sos_triggered": False,
+        }
+    if any(k in text for k in KIDNEY_KEYWORDS):
+        return {
+            "reply": ("Kidney-related symptoms can be assessed in the 🫘 Kidney Disease module. "
+                      "It evaluates creatinine, urea, blood pressure, and urinalysis results."),
+            "sos_triggered": False,
+        }
+    if any(k in text for k in LIVER_KEYWORDS):
+        return {
+            "reply": ("For liver concerns, use the 🫀 Liver Disease module. "
+                      "It analyses bilirubin, ALT, AST, albumin, and other liver function markers."),
+            "sos_triggered": False,
+        }
+    if any(k in text for k in THYROID_KEYWORDS):
+        return {
+            "reply": ("Thyroid issues can be screened in the 🦋 Thyroid module. "
+                      "Provide your TSH, T3, TT4 values and related history for a prediction."),
+            "sos_triggered": False,
+        }
+    if any(k in text for k in LUNG_KEYWORDS):
+        return {
+            "reply": ("Respiratory symptoms can be checked in the 🫁 Lung module. "
+                      "It uses a trained SVM model on smoking history, symptoms, and other factors."),
+            "sos_triggered": False,
+        }
+
+    # --- Mental health ---
     if any(k in text for k in MENTAL_HEALTH_KEYWORDS):
         return {
-            "reply": ("I'm sorry you're feeling this way. On a scale of 1-10, how would you rate your mood today? "
-                      "You can also log it in the Mental Health tab."),
+            "reply": ("I'm sorry you're feeling this way. You're not alone. "
+                      "Please visit the 🧠 Mental Health module for a structured assessment, "
+                      "or consider reaching out to a mental health professional."),
             "sos_triggered": False,
         }
 
+    # --- General symptoms ---
     if any(k in text for k in SYMPTOM_KEYWORDS):
         return {
-            "reply": ("Thanks for sharing your symptoms. This could range from a mild issue to something needing "
-                      "attention. Please use the Symptom Checker tab for a more structured assessment. "
-                      "This is not a medical diagnosis."),
+            "reply": ("Thanks for sharing your symptoms. "
+                      "For a structured assessment, please use one of the disease modules in the sidebar — "
+                      "each one is tailored to specific conditions. "
+                      "Type 'help' to see all available tools."),
             "sos_triggered": False,
         }
 
+    # --- Greetings ---
+    if any(k in text for k in ["hi", "hello", "hey", "good morning", "good evening"]):
+        return {
+            "reply": ("Hello! 👋 I'm your AI Health Assistant. "
+                      "Describe your symptoms or type 'help' to see everything I can do."),
+            "sos_triggered": False,
+        }
+
+    # --- Fallback ---
     return {
-        "reply": "Got it - tell me more about your symptoms, or use the sidebar to navigate to a specific feature.",
+        "reply": ("I'm not sure I understood that. Try describing your symptoms, "
+                  "or type 'help' to see all available features."),
         "sos_triggered": False,
     }
 
@@ -286,6 +375,80 @@ def check_vitals(heart_rate: float, spo2: float, temperature_c: float) -> list:
     if temperature_c > 38.5:
         alerts.append(f"High fever detected: {temperature_c}C")
     return alerts
+
+
+# -------------------------------------------------------------------
+# DISEASE PREDICTION - INTEGRATED WITH TRAINED MODELS
+# -------------------------------------------------------------------
+def _safe_predict_disease(module_name: str, patient_data: dict) -> dict:
+    """Internal helper: calls the imported predict_disease only if it was
+    actually bound (model_integration imported successfully). Checking
+    `predict_disease is not None` directly (rather than the separate
+    MODEL_INTEGRATION_AVAILABLE flag) lets type checkers correctly narrow
+    away the Optional/None case, and guarantees this never calls None at
+    runtime even if the two ever got out of sync."""
+    if predict_disease is None:
+        return {"error": "Model integration not available"}
+    return predict_disease(module_name, patient_data)
+
+
+def predict_heart_disease(patient_data):
+    """Predict heart disease using trained model"""
+    return _safe_predict_disease("heart", patient_data)
+
+
+def predict_kidney_disease(patient_data):
+    """Predict kidney disease using trained model"""
+    return _safe_predict_disease("kidney", patient_data)
+
+
+def predict_diabetes(patient_data):
+    """Predict diabetes using trained model"""
+    return _safe_predict_disease("diabetes", patient_data)
+
+
+def predict_lung_disease(patient_data):
+    """Predict lung disease using trained model"""
+    return _safe_predict_disease("lung", patient_data)
+
+
+def predict_thyroid_disease(patient_data):
+    """Predict thyroid disease using trained model"""
+    return _safe_predict_disease("thyroid", patient_data)
+
+
+def predict_liver_disease(patient_data):
+    """Predict liver disease using trained model"""
+    return _safe_predict_disease("liver", patient_data)
+
+
+def predict_survey_risk(patient_data):
+    """Predict glucose risk from survey data using trained model"""
+    return _safe_predict_disease("survey", patient_data)
+
+
+def assess_gallbladder_risk(symptoms):
+    """Assess gallbladder risk using rule-based engine"""
+    return _safe_predict_disease("gallbladder", symptoms)
+
+
+def assess_mental_health_risk(responses):
+    """Assess mental health using rule-based engine"""
+    return _safe_predict_disease("mental_health", responses)
+
+
+def get_disease_modules():
+    """Get list of available disease prediction modules"""
+    if get_available_modules is not None:
+        return get_available_modules()
+    return []
+
+
+def get_required_features(module_name):
+    """Get required features for a disease module"""
+    if get_module_features is not None:
+        return get_module_features(module_name)
+    return []
 
 
 # -------------------------------------------------------------------

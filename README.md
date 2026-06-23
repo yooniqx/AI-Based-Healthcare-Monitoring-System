@@ -27,6 +27,33 @@ The system includes the following disease prediction modules:
 - **NumPy** - Numerical computing
 - **Scikit-Learn** - Machine learning and preprocessing
 - **Matplotlib/Seaborn** - Data visualization
+
+## 🚀 Running the Application
+
+### Prerequisites
+```bash
+pip install streamlit pandas numpy scikit-learn
+```
+
+### Launch the Web Application
+```bash
+cd development
+streamlit run app.py
+```
+
+The application will open in your browser at `http://localhost:8501`
+
+### Features
+- **9 Disease Prediction Modules**: Heart, Kidney, Diabetes, Lung, Thyroid, Liver, Survey, Gallbladder, Mental Health
+- **ML-Based Predictions**: 7 trained machine learning models with high accuracy
+- **Rule-Based Assessments**: Gallbladder and Mental Health screening engines
+- **Interactive UI**: User-friendly forms for patient data entry
+- **Real-time Results**: Instant risk assessment with recommendations
+- **Health Chatbot**: General health guidance and symptom routing
+- **Medication Reminders**: Track daily medications
+- **Vitals Monitoring**: Monitor heart rate, SpO2, and temperature
+- **Emergency SOS**: Simulated emergency alert system
+
 - **Streamlit** - Web application framework (upcoming)
 
 ## 📁 Project Structure
@@ -100,14 +127,12 @@ PROJECT/
 8. **Model Training** - Trained and evaluated models for all 9 modules
 9. **Model Validation** - Tested and validated all prediction systems
 10. **Hyperparameter Tuning** - Optimized model parameters using GridSearchCV for all 7 ML modules
+11. **Streamlit Frontend** - Web-based prediction interface with 14 pages
+12. **Module Integration** - Complete system integration via model_integration.py
+13. **Healthcare Recommendations** - Personalised advice and specialist routing per prediction
+14. **Chatbot + SOS Integration** - Symptom chatbot, emergency SOS alert, and vitals monitor
 
-### 🔜 Upcoming Stages
-
-- Streamlit Frontend - Web-based prediction interface
-- Module Integration - Complete system integration
-- Healthcare Recommendations - Personalized health advice
-- Chatbot Integration - Interactive health assistant
-- SOS Functionality - Emergency alert system
+### 🎉 Project Complete!
 
 ## 📊 Model Training Status
 
