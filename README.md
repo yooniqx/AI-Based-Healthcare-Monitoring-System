@@ -10,6 +10,10 @@ This system enables early detection of various health conditions through data-dr
 
 Experience our intuitive healthcare monitoring interface designed for seamless user interaction and accurate disease prediction.
 
+### 🌐 Live Demo
+
+**[https://ai-based-healthcare-monitoring-system.onrender.com](https://ai-based-healthcare-monitoring-system.onrender.com)**
+
 ### Homepage & Dashboard
 ![Homepage](assests/homepage.jpeg)
 *Clean, user-friendly interface providing easy access to all health monitoring modules and features*
