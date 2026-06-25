@@ -4,8 +4,8 @@
   "models": {
     "heart": {
       "module_name": "heart",
-      "model_path": "models\\heart_model.pkl",
-      "scaler_path": "models\\heart_scaler.pkl",
+      "model_path": "models/heart_model.pkl",
+      "scaler_path": "models/heart_scaler.pkl",
       "model_type": "RandomForestClassifier",
       "feature_names": [
         "age",
@@ -36,8 +36,8 @@
     },
     "kidney": {
       "module_name": "kidney",
-      "model_path": "models\\kidney_model.pkl",
-      "scaler_path": "models\\kidney_scaler.pkl",
+      "model_path": "models/kidney_model.pkl",
+      "scaler_path": "models/kidney_scaler.pkl",
       "model_type": "LogisticRegression",
       "feature_names": [
         "age",
@@ -79,8 +79,8 @@
     },
     "lung": {
       "module_name": "lung",
-      "model_path": "models\\lung_model.pkl",
-      "scaler_path": "models\\lung_scaler.pkl",
+      "model_path": "models/lung_model.pkl",
+      "scaler_path": "models/lung_scaler.pkl",
       "model_type": "SVC",
       "feature_names": [
         "feature_1",
@@ -153,8 +153,8 @@
     },
     "diabetes": {
       "module_name": "diabetes",
-      "model_path": "models\\diabetes_model.pkl",
-      "scaler_path": "models\\diabetes_scaler.pkl",
+      "model_path": "models/diabetes_model.pkl",
+      "scaler_path": "models/diabetes_scaler.pkl",
       "model_type": "LogisticRegression",
       "feature_names": [
         "Patient_ID",
@@ -187,8 +187,8 @@
     },
     "thyroid": {
       "module_name": "thyroid",
-      "model_path": "models\\thyroid_model.pkl",
-      "scaler_path": "models\\thyroid_scaler.pkl",
+      "model_path": "models/thyroid_model.pkl",
+      "scaler_path": "models/thyroid_scaler.pkl",
       "model_type": "RandomForestClassifier",
       "feature_names": [
         "age",
@@ -285,8 +285,8 @@
     },
     "liver": {
       "module_name": "liver",
-      "model_path": "models\\liver_model.pkl",
-      "scaler_path": "models\\liver_scaler.pkl",
+      "model_path": "models/liver_model.pkl",
+      "scaler_path": "models/liver_scaler.pkl",
       "model_type": "RandomForestClassifier",
       "feature_names": [
         "mcv",
@@ -404,7 +404,7 @@
     },
     "gallbladder": {
       "module_name": "gallbladder",
-      "model_path": "models\\gallbladder_screening_engine.py",
+      "model_path": "models/gallbladder_screening_engine.py",
       "model_type": "RuleBasedScreeningEngine",
       "approach": "Symptom-based risk scoring system",
       "input_type": "Clinical symptoms and patient history",
@@ -436,7 +436,7 @@
     },
     "mental_health": {
       "module_name": "mental_health",
-      "model_path": "models\\mental_health_screening_engine.py",
+      "model_path": "models/mental_health_screening_engine.py",
       "model_type": "RuleBasedScreeningEngine",
       "approach": "Questionnaire-based stress assessment",
       "input_type": "10-question stress and mental health survey",
@@ -468,8 +468,8 @@
     },
     "survey": {
       "module_name": "survey",
-      "model_path": "models\\survey_model.pkl",
-      "scaler_path": "models\\survey_scaler.pkl",
+      "model_path": "models/survey_model.pkl",
+      "scaler_path": "models/survey_scaler.pkl",
       "model_type": "RandomForestClassifier",
       "feature_names": [
         "seqn",

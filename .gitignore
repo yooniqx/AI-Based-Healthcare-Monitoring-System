@@ -46,3 +46,7 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.log
+
+# Runtime database (created automatically on first run)
+development/healthcare.db
+healthcare.db

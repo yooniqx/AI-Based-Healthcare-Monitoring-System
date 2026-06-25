@@ -1,4 +1,14 @@
 # AI Healthcare System - Integrated Frontend
+import sys
+import os
+
+# Ensure 'development/' is on sys.path so that sibling modules (backend,
+# model_integration) can be imported regardless of the working directory
+# Render launches Streamlit from the repo root, so this is required.
+_HERE = os.path.dirname(os.path.abspath(__file__))
+if _HERE not in sys.path:
+    sys.path.insert(0, _HERE)
+
 import streamlit as st
 import pandas as pd
 import numpy as np
